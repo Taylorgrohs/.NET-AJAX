@@ -15,68 +15,68 @@
                 }
             });
         });
-    $('.hello-ajax').click(function () {
-        $.ajax({
-            type: 'GET',
-            url: '@Url.Action("HelloAjax")',
-            success: function (result) {
-                $('#result1').html(result);
-            }
-        });
-    });
-    $('.display-object').click(function () {
-        $.ajax({
-            type: 'GET',
-            dataType: 'json',
-            contentType: 'application/json',
-            url: '@Url.Action("DisplayObject")',
-            success: function (result) {
-                var resultString = 'Id: ' + result.Id + '<br>City: ' + result.City + '<br>Country: ' + result.Country;
-                $('#result3').html(resultString);
-            }
-        });
-    });
-    $('.display-view').click(function () {
-        $.ajax({
-            type: 'GET',
-            dataType: 'html',
-            url: '@Url.Action("DisplayViewWithAjax")',
-            success: function (result) {
-                $('#result4').html(result);
-            }
-        });
-    });
-    $('.display-random-database-items').submit(function (event) {
-        event.preventDefault();
-        $.ajax({
-            url: '@Url.Action("RandomDestinationList")',
-            type: 'GET',
-            data: $(this).serialize(),
-            dataType: 'json',
-            success: function (result) {
-                var stringResult = '<ul>';
-                for (var i = 0; i < result.length; i++) {
-                    stringResult += '<li>' + result[i].City + ', ' + result[i].Country + '</li>';
+        $('.hello-ajax').click(function () {
+            $.ajax({
+                type: 'GET',
+                url: '@Url.Action("HelloAjax", "Home")',
+                success: function (result) {
+                    $('#result1').html(result);
                 }
-                stringResult += '</ul>';
-                $('#result5').html(stringResult);
-            }
+            });
+        });
+        $('.display-object').click(function () {
+            $.ajax({
+                type: 'GET',
+                dataType: 'json',
+                contentType: 'application/json',
+                url: '@Url.Action("DisplayObject")',
+                success: function (result) {
+                    var resultString = 'Id: ' + result.Id + '<br>City: ' + result.City + '<br>Country: ' + result.Country;
+                    $('#result3').html(resultString);
+                }
+            });
+        });
+        $('.display-view').click(function () {
+            $.ajax({
+                type: 'GET',
+                dataType: 'html',
+                url: '@Url.Action("DisplayViewWithAjax")',
+                success: function (result) {
+                    $('#result4').html(result);
+                }
+            });
+        });
+        $('.display-random-database-items').submit(function (event) {
+            event.preventDefault();
+            $.ajax({
+                url: '@Url.Action("RandomDestinationList")',
+                type: 'GET',
+                data: $(this).serialize(),
+                dataType: 'json',
+                success: function (result) {
+                    var stringResult = '<ul>';
+                    for (var i = 0; i < result.length; i++) {
+                        stringResult += '<li>' + result[i].City + ', ' + result[i].Country + '</li>';
+                    }
+                    stringResult += '</ul>';
+                    $('#result5').html(stringResult);
+                }
+            });
+        });
+        $('.new-destination').submit(function (event) {
+            event.preventDefault();
+            $.ajax({
+                url: '@Url.Action("NewDestination")',
+                type: 'POST',
+                dataType: 'json',
+                data: $(this).serialize(),
+                success: function (result) {
+                    var resultMessage = 'You\'ve added a new destination to the database!<br>Id: ' + result.Id + '<br>City: ' + result.City + '<br>Country: ' + result.Country;
+                    $('#result6').html(resultMessage);
+                }
+            });
         });
     });
-    $('.new-destination').submit(function (event) {
-        event.preventDefault();
-        $.ajax({
-            url: '@Url.Action("NewDestination")',
-            type: 'POST',
-            dataType: 'json',
-            data: $(this).serialize(),
-            success: function (result) {
-                var resultMessage = 'You\'ve added a new destination to the database!<br>Id: ' + result.Id + '<br>City: ' + result.City + '<br>Country: ' + result.Country;
-                $('#result6').html(resultMessage);
-            }
-        });
-    });
-});
 </script>
     
 <div class="container">
