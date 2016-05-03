@@ -66,6 +66,19 @@
                 }
             });
         });
+        $('.new-destination').submit(function (event) {
+            event.preventDefault();
+            $.ajax({
+                url: '@Url.Action("NewDestination")',
+                type: 'POST',
+                dataType: 'json',
+                data: $(this).serialize(),
+                success: function (result) {
+                    var resultMessage = 'You\'ve added a new destination to the database!<br>Id: ' + result.Id + '<br>City: ' + result.City + '<br>Country: ' + result.Country;
+                    $('#result6').html(resultMessage);
+                }
+            });
+        });
     });
     </script>
     
